@@ -106,15 +106,19 @@
    cd AgriSync
 
 2. **🔧 Install Dependencies**
+   ```bash
    pip install -r requirements.txt
 
 3. **🗄️ Initialize Database**
+   ```bash
    python app.py
-   _The database will be automatically created on first run_
+_The database will be automatically created on first run_
 
+   
 4. **🌐 Launch Application**
+    ```bas
     python app.py
-    _Navigate to http://localhost:5000 in your browser_
+ _Navigate to http://localhost:5000 in your browser_
 
 
 ### 📞 Contact & Support
@@ -122,15 +126,16 @@
 <div align="center">
 
 🌐 Get in Touch
-
-
+   📞 +234 916 160 9808
+   ✉️ muhammadbashir4338@gmail.com
 
 
 
 
 📱 Follow Us
-
-
+  🔵 Facebook: facebook.com/yourprofile
+   🐦 Twitter: twitter.com/yourprofile
+   🔗 LinkedIn: linkedin.com/in/yourprofile
 
 
 
