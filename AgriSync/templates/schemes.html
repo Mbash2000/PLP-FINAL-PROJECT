@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AgriSync — Nigeria Agricultural Schemes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gradient-to-b from-blue-200 to-pink-200 font-serif">
+
+  <nav class="bg-[#65b741] p-4 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+      <a class="logo text-2xl text-white flex items-center" href="#">
+        <i class="fas fa-tree pr-2"></i>
+        AgriSync
+      </a>
+      <div class="hidden md:flex space-x-4">
+        <a class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/">Home</a>
+        <a class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/contact">Contact</a>
+      </div>
+      <div class="relative">
+        <button class="fas fa-bars text-2xl cursor-pointer text-white focus:outline-none" id="dropdownButton" onclick="toggleDropdown()"></button>
+        <ul class="absolute right-0 mt-2 w-64 bg-white text-black rounded-lg shadow-lg hidden" id="dropdownMenu">
+          <li class="px-4 py-2 border-b border-gray-200"><a class="block p-2" href="/">Home</a></li>
+          <!-- Add more nav links as needed -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mx-auto my-10">
+    <div class="bg-white shadow-md rounded-lg p-6">
+      <h1 class="text-4xl font-bold text-center mb-6 text-green-700">Nigeria Agricultural Support Programmes</h1>
+      <p class="text-center mb-4 text-lg text-gray-700">
+        Explore some major programmes and initiatives supporting farmers across Nigeria.
+      </p>
+      <hr class="my-4"/>
+      <div class="text-center">
+        <button class="bg-green-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-green-600 transition duration-300" onclick="toggleSchemes()">
+          View Programmes
+        </button>
+      </div>
+
+      <div class="mt-6 hidden" id="schemes">
+        <!-- Scheme 1: Anchor Borrowers’ Programme (ABP) -->
+        <div class="text-center mb-4">
+          <button class="bg-blue-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-600 transition duration-300" onclick="toggleSchemeDetails('scheme1')">
+            Anchor Borrowers’ Programme (ABP)
+          </button>
+        </div>
+        <div class="hidden" id="scheme1">
+          <div class="overflow-auto bg-gray-100 p-6 rounded-lg shadow-inner">
+            <table class="table-auto w-full text-left">
+              <tr><td class="p-4"><h1 class="text-2xl font-bold text-green-700">Anchor Borrowers’ Programme (ABP)</h1></td></tr>
+              <tr><td class="p-4 text-gray-700">
+                The ABP by Central Bank of Nigeria (CBN) supports smallholder farmers with loans/inputs to produce key crops — especially rice, maize, cassava and more. This initiative helps boost domestic food production and reduce reliance on food imports. :contentReference[oaicite:1]{index=1}
+              </td></tr>
+              <tr><td class="p-4"><h2 class="text-xl font-bold text-green-700">Who Can Apply</h2><hr class="my-4"/></td></tr>
+              <tr><td class="p-4 text-gray-700">
+                Smallholder farmers involved in priority crops, organized as cooperatives or individual small farms. :contentReference[oaicite:2]{index=2}
+              </td></tr>
+              <tr><td class="p-4"><h2 class="text-xl font-bold text-green-700">Benefits</h2><hr class="my-4"/></td></tr>
+              <tr><td class="p-4 text-gray-700">
+                <ul class="list-disc ml-5">
+                  <li>Access to subsidized inputs (seeds, fertilizers)</li>
+                  <li>Low-interest loan/credit support</li>
+                  <li>Support for production of staple crops — boosting food security</li>
+                </ul>
+              </td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Scheme 2: Growth Enhancement Support Scheme (GESS) -->
+        <div class="text-center mb-4">
+          <button class="bg-blue-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-600 transition duration-300" onclick="toggleSchemeDetails('scheme2')">
+            Growth Enhancement Support Scheme (GESS)
+          </button>
+        </div>
+        <div class="hidden" id="scheme2">
+          <div class="overflow-auto bg-gray-100 p-6 rounded-lg shadow-inner">
+            <table class="table-auto w-full text-left">
+              <tr><td class="p-4"><h1 class="text-2xl font-bold text-green-700">Growth Enhancement Support Scheme (GESS)</h1></td></tr>
+              <tr><td class="p-4 text-gray-700">
+                GESS is an input‑subsidy initiative that provides farmers with subsidized fertilizers, improved seeds and agro‑inputs via registration and e‑wallet support. :contentReference[oaicite:3]{index=3}
+              </td></tr>
+              <tr><td class="p these p-4"><h2 class="text-xl font-bold text-green-700">Purpose & Reach</h2><hr class="my-4"/></td></tr>
+              <tr><td class="p-4 text-gray-700">
+                Intended especially for smallholder farmers, GESS aims to increase yield, boost agricultural productivity and make inputs affordable. Between 2012–2014, millions of farmers benefited. :contentReference[oaicite:4]{index=4}
+              </td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Scheme 3: NIRSAL Risk‑Sharing & Support Platform -->
+        <div class="text-center mb-4">
+          <button class="bg-blue-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-600 transition duration-300" onclick="toggleSchemeDetails('scheme3')">
+            NIRSAL Risk & Financing Support
+          </button>
+        </div>
+        <div class="hidden" id="scheme3">
+          <div class="overflow-auto bg-gray-100 p-6 rounded-lg shadow-inner">
+            <table class="table-auto w-full text-left">
+              <tr><td class="p-4"><h1 class="text-2xl font-bold text-green-700">NIRSAL Plc (Nigeria Incentive‑Based Risk Sharing System for Agricultural Lending)</h1></td></tr>
+              <tr><td class="p-4 text-gray-700">
+                NIRSAL helps de-risk agricultural lending in Nigeria — offering credit‑risk guarantees, facilitating affordable loans, and providing technical assistance to farmers and agro‑processors. :contentReference[oaicite:6]{index=6}
+              </td></tr>
+              <tr><td class="p-4"><h2 class="text-xl font-bold text-green-700">Features</h2><hr class="my-4"/></td></tr>
+              <tr><td class="p-4 text-gray-700">
+                <ul class="list-disc ml-5">
+                  <li>Credit‑risk guarantee for banks lending to agriculture</li>
+                  <li>Support for cooperatives and smallholders without traditional collateral</li>
+                  <li>Technical assistance, capacity building, and value‑chain support</li>
+                </ul>
+              </td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Scheme 4: Private‑Sector Led Land & Infrastructure Support (P‑AADS) -->
+        <div class="text-center mb-4">
+          <button class="bg-blue-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-600 transition duration-300" onclick="toggleSchemeDetails('scheme4')">
+            Accelerated / Private‑Sector Agricultural Development (P‑AADS)
+          </button>
+        </div>
+        <div class="hidden" id="scheme4">
+          <div class="overflow-auto bg-gray-100 p-6 rounded-lg shadow-inner">
+            <table class="table-auto w-full text-left">
+              <tr><td class="p-4"><h1 class="text-2xl font-bold text-green-700">Private‑Sector Agricultural Development Scheme (P‑AADS)</h1></td></tr>
+              <tr><td class="p-4 text-gray-700">
+                The Central Bank of Nigeria initiated P‑AADS to support large‑scale agricultural production through land clearing, infrastructure facilitation, and financing for agro‑processors and serious farmers. :contentReference[oaicite:8]{index=8}
+              </td></tr>
+              <tr><td class="p-4"><h2 class="text-xl font-bold text-green-700">Target Beneficiaries</h2><hr class="my-4"/></td></tr>
+              <tr><td class="p-4 text-gray-700">
+                Agro‑processors, commercial farmers, investors in agriculture seeking land clearing, mechanization, and scale production support. :contentReference[oaicite:9]{index=9}
+              </td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Scheme 5: National Programme for Food Security (NPFS) -->
+        <div class="text-center mb-4">
+          <button class="bg-blue-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-600 transition duration-300" onclick="toggleSchemeDetails('scheme5')">
+            National Programme for Food Security (NPFS)
+          </button>
+        </div>
+        <div class="hidden" id="scheme5">
+          <div class="overflow-auto bg-gray-100 p-6 rounded-lg shadow-inner">
+            <table class="table-auto w-full text-left">
+              <tr><td class="p-4"><h1 class="text-2xl font-bold text-green-700">National Programme for Food Security (NPFS)</h1></td></tr>
+              <tr><td class="p-4 text-gray-700">
+                The Federal Ministry of Agriculture and Food Security (FMAFS) administers NPFS to boost food production and enhance rural livelihoods across Nigeria. :contentReference[oaicite:11]{index=11}
+              </td></tr>
+              <tr><td class="p-4"><h2 class="text-xl font-bold text-green-700">Objective</h2><hr class="my-4"/></td></tr>
+              <tr><td class="p-4 text-gray-700">
+                Improve national & household food security, increase agricultural productivity, provide extension services and support to rural farmers. :contentReference[oaicite:12]{index=12}
+              </td></tr>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleDropdown() {
+      const dm = document.getElementById('dropdownMenu');
+      dm.classList.toggle('hidden');
+    }
+    function toggleSchemes() {
+      const sch = document.getElementById('schemes');
+      sch.classList.toggle('hidden');
+    }
+    function toggleSchemeDetails(id) {
+      const el = document.getElementById(id);
+      el.classList.toggle('hidden');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<form action="/submit" method="POST" enctype="multipart/form-data">
+    <input type="file" id="actual-btn" hidden name="image" />
+    <label for="actual-btn" class="cursor-pointer">Choose File</label>
+    <label id="camera-btn" class="cursor-pointer ml-4">Open Camera</label>
+    <br />
+    <span id="file-chosen">No file chosen</span>
+
+    <div id="camera-container" style="display:none;">
+        <video id="camera-feed" width="320" height="240" autoplay></video>
+        <button type="button" id="capture-btn">Capture Photo</button>
+    </div>
+
+    <canvas id="canvas" style="display:none;"></canvas>
+
+    <img id="preview" src="#" alt="Camera Photo Preview" style="display:none; max-width:100%;" />
+
+    <button type="submit" class="btn btn-outline-success mt-3">Submit</button>
+</form>
+
+<script>
+    const actualBtn = document.getElementById('actual-btn');
+    const fileChosen = document.getElementById('file-chosen');
+    const cameraBtn = document.getElementById('camera-btn');
+    const cameraContainer = document.getElementById('camera-container');
+    const cameraFeed = document.getElementById('camera-feed');
+    const captureBtn = document.getElementById('capture-btn');
+    const preview = document.getElementById('preview');
+    const canvas = document.getElementById('canvas');
+
+    let capturedFile = null;
+
+    actualBtn.addEventListener('change', function () {
+        if(this.files.length > 0) {
+            fileChosen.textContent = this.files[0].name;
+        } else {
+            fileChosen.textContent = 'No file chosen';
+        }
+    });
+
+    cameraBtn.addEventListener('click', () => {
+        cameraContainer.style.display = 'block';
+        startCamera();
+    });
+
+    async function startCamera() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            cameraFeed.srcObject = stream;
+        } catch (err) {
+            console.error('Error accessing camera:', err);
+            alert('Could not access camera.');
+        }
+    }
+
+    captureBtn.addEventListener('click', () => {
+        canvas.width = cameraFeed.videoWidth;
+        canvas.height = cameraFeed.videoHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(cameraFeed, 0, 0, canvas.width, canvas.height);
+
+        canvas.toBlob(blob => {
+            capturedFile = new File([blob], "captured.jpg", { type: 'image/jpeg' });
+
+            // Update file input with captured file
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(capturedFile);
+            actualBtn.files = dataTransfer.files;
+
+            fileChosen.textContent = capturedFile.name;
+
+            // Show preview
+            preview.src = URL.createObjectURL(capturedFile);
+            preview.style.display = 'block';
+
+            // Hide camera container and stop camera stream
+            cameraContainer.style.display = 'none';
+            stopCamera();
+        }, 'image/jpeg', 1);
+    });
+
+    function stopCamera() {
+        const stream = cameraFeed.srcObject;
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+        }
+        cameraFeed.srcObject = null;
+    }
+</script>

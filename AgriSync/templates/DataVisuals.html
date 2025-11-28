@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriSync | Data Visuals</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- NAVBAR -->
+    <nav class="bg-[#4A9D37] shadow-md p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-white text-3xl font-bold tracking-wide">AgriSync</a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-6 text-white font-semibold">
+                <a href="/" class="hover:text-gray-200">Home</a>
+                <a href="/" class="hover:text-gray-200">About</a>
+                <a href="./contact" class="hover:text-gray-200">Contact</a>
+            </div>
+
+            <!-- Dropdown Menu -->
+            <div class="relative md:hidden">
+                <button onclick="toggleDropdown()" class="text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <ul id="dropdownMenu"
+                    class="hidden absolute right-0 mt-3 w-64 bg-white rounded-lg shadow-lg py-2 text-gray-800">
+                    <li><a class="menu-link" href="{{ url_for('ai_engine_page') }}">AI Diagnosis</a></li>
+                    <li><a class="menu-link" href="{{ url_for('crop_recommendation') }}">Crop Recommendation</a></li>
+                    <li><a class="menu-link" href="{{ url_for('weather_page') }}">Weather Insights</a></li>
+                    <li><a class="menu-link" href="{{ url_for('schemes_page') }}">Agricultural Schemes</a></li>
+                    <li><a class="menu-link" href="{{ url_for('data_visuals') }}">Data Visuals</a></li>
+                    <li><a class="menu-link" href="{{ url_for('help_line') }}">Farm Connect</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <style>
+        .menu-link {
+            display: block;
+            padding: 12px 16px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .menu-link:hover {
+            background-color: #e8f5e9;
+            color: #2f6d2f;
+        }
+    </style>
+
+    <!-- HEADER -->
+    <div class="container mx-auto my-10">
+        <div class="bg-green-100 p-6 rounded-xl shadow-md">
+            <h2 class="text-center text-3xl font-extrabold text-green-800 uppercase tracking-wide">
+                Crop Production Data Visuals
+            </h2>
+            <p class="text-center text-lg text-green-700 mt-3">
+                Explore the top 5 crop-producing states across India using interactive charts.
+            </p>
+        </div>
+
+        <!-- CHART GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+
+            <!-- Card Template -->
+            <div class="chart-card">
+                <h3 class="chart-title">Rice Production (India)</h3>
+                <canvas id="chart1"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h3 class="chart-title">Jute Production (India)</h3>
+                <canvas id="chart2"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h3 class="chart-title">Maize Production (India)</h3>
+                <canvas id="chart3"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h3 class="chart-title">Mango Production (India)</h3>
+                <canvas id="chart4"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h3 class="chart-title">Papaya Production (India)</h3>
+                <canvas id="chart5"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h3 class="chart-title">Banana Production (India)</h3>
+                <canvas id="chart6"></canvas>
+            </div>
+
+        </div>
+
+        <!-- OBSERVATIONS SECTION -->
+        <div class="bg-green-100 p-6 rounded-xl shadow-md mt-12">
+            <h2 class="text-center text-2xl font-bold text-green-800">Key Insights</h2>
+
+            <ul class="text-center mt-6 space-y-3 text-lg text-green-700">
+                <li><b class="highlight">Punjab</b> dominates rice production.</li>
+                <li><b class="highlight">West Bengal</b> leads in Jute cultivation.</li>
+                <li><b class="highlight">Telangana</b> excels in Maize farming.</li>
+                <li><b class="highlight">Andhra Pradesh</b> tops Mango output.</li>
+                <li><b class="highlight">Andhra Pradesh</b> also leads in Papaya.</li>
+                <li><b class="highlight">Gujarat</b> produces the most Bananas.</li>
+            </ul>
+        </div>
+
+        <div class="text-center mt-10">
+            <a href="/">
+                <button class="bg-green-600 text-white px-6 py-3 rounded-lg text-lg shadow-md hover:bg-green-700">
+                    ⬅ Back to Home
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <style>
+        .chart-card {
+            background: white;
+            padding: 18px;
+            border-radius: 14px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .chart-title {
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #256428;
+        }
+
+        .highlight {
+            color: #145a1a;
+            font-weight: 800;
+        }
+    </style>
+
+    <!-- CHART JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <script>
+        const createChart = (id, title, labels, values) => {
+            new Chart(document.getElementById(id), {
+                type: "bar",
+                data: {
+                    labels,
+                    datasets: [{
+                        label: title,
+                        data: values,
+                        backgroundColor: "rgba(75, 181, 67, 0.3)",
+                        borderColor: "#4A9D37",
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    scales: {
+                        yAxes: [{ ticks: { beginAtZero: true, fontSize: 14 } }],
+                        xAxes: [{ ticks: { fontSize: 14 } }]
+                    }
+                }
+            });
+        };
+
+        createChart("chart1", "Rice Production", ["Punjab", "AP", "Chhattisgarh", "WB", "Telangana"], [531663, 298841, 279105, 266350, 221072]);
+        createChart("chart2", "Jute Production", ["WB", "Bihar", "Assam", "Meghalaya", "Odisha"], [484674, 83199, 25968, 11822, 4583]);
+        createChart("chart3", "Maize Production", ["Telangana", "HP", "Rajasthan", "AP", "Punjab"], [99867, 54259, 46552, 40630, 36767]);
+        createChart("chart4", "Mango Production", ["AP", "Kerala", "TN", "Telangana", "Karnataka"], [126983, 28950, 24068, 19840, 13236]);
+        createChart("chart5", "Papaya Production", ["AP", "Kerala", "Assam", "Telangana", "Manipur"], [41551, 6225, 5234, 4766, 1219]);
+        createChart("chart6", "Banana Production", ["Gujarat", "TN", "Maharashtra", "AP", "MP"], [161797, 134980, 129811, 96421, 36190]);
+
+        function toggleDropdown() {
+            document.getElementById("dropdownMenu").classList.toggle("hidden");
+        }
+    </script>
+
+</body>
+
+</html>

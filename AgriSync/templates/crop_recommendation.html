@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation System</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-color);
+            transition: 0.3s;
+            background: linear-gradient(rgba(255, 255, 255, 0.15),
+                    rgba(255, 255, 255, 0.15)),
+                url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg,
+                    rgba(94, 137, 67, 0.6),
+                    rgba(139, 195, 74, 0.5),
+                    rgba(255, 235, 59, 0.4));
+            z-index: -1;
+        }
+
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1e293b;
+            --form-bg: rgba(255, 255, 255, 0.9);
+            --input-bg: rgba(240, 240, 240, 0.8);
+            --btn-bg: #22c55e;
+            --btn-hover: #16a34a;
+            --accent-color: #22c55e;
+        }
+
+        .dark-mode {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --form-bg: rgba(15, 23, 42, 0.95);
+            --input-bg: rgba(30, 41, 59, 0.8);
+            --btn-bg: #14b8a6;
+            --btn-hover: #0d9488;
+            --accent-color: #14b8a6;
+        }
+
+        .form-box {
+            width: 420px;
+            background: var(--form-bg);
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            backface-visibility: hidden;
+        }
+
+        .flip-container {
+            perspective: 2000px;
+        }
+
+        .flip-box {
+            width: 420px;
+            height: 820px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: 0.6s;
+        }
+
+        .flip-box.active {
+            transform: rotateY(180deg);
+        }
+
+        .fertilizer-box {
+            transform: rotateY(180deg);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .input-box {
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .input-box input,
+        .input-box select {
+            width: 100%;
+            padding: 12px 14px 12px 38px;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            background: var(--input-bg);
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .input-box i {
+            position: absolute;
+            top: 50%;
+            left: 12px;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            background: var(--btn-bg);
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--btn-hover);
+        }
+
+        .result-box {
+            background: var(--form-bg);
+            padding: 18px;
+            border-radius: 12px;
+            margin-top: 16px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+        }
+
+        .toggle-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .toggle-link a {
+            color: var(--accent-color);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 25px;
+            font-size: 26px;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- DARK MODE -->
+    <i class='bx bx-moon mode-toggle' onclick="toggleMode()"></i>
+
+    <!-- FLIP FORMS -->
+    <div class="flip-container">
+        <div class="flip-box">
+
+            <!-- CROP FORM -->
+            <div class="form-box crop-box">
+                <h2 class="title">Crop Recommendation</h2>
+
+                <form id="cropForm">
+                    <div class="input-box">
+                        <i class='bx bx-atom'></i>
+                        <input type="number" step="0.01" id="N" placeholder="Nitrogen (N)" required>
+                    </div>
+
+                    <div class="input-box">
+                        <i class='bx bx-leaf'></i>
+                        <input type="number" step="0.01" id="P" placeholder="Phosphorus (P)" required>
+                    </div>
+
+                    <div class="input-box">
+                        <i class='bx bx-test-tube'></i>
+                        <input type="number" step="0.01" id="K" placeholder="Potassium (K)" required>
+                    </div>
+
+                    <div class="input-box">
+                        <i class="fas fa-thermometer-half"></i>
+                        <input type="number" step="0.01" id="temperature" placeholder="Temperature (°C)" required>
+                    </div>
+
+                    <div class="input-box">
+                        <i class='bx bx-water'></i>
+                        <input type="number" step="0.01" id="humidity" placeholder="Humidity (%)" required>
+                    </div>
+
+                    <div class="input-box">
+                        <i class='bx bx-test-tube'></i>
+                        <input type="number" step="0.01" id="ph" placeholder="pH Level" required>
+                    </div>
+
+                    <div class="input-box">
+                        <i class='bx bx-cloud-drizzle'></i>
+                        <input type="number" step="0.01" id="rain" placeholder="Rainfall (mm)" required>
+                    </div>
+
+                    <button class="btn" type="submit">Get Recommendation</button>
+                </form>
+
+                <div class="result-box" id="cropResult">
+                    <h4 class="font-semibold text-green-600 mb-1">Recommended Crop:</h4>
+                    <p id="cropResultText"></p>
+                </div>
+
+                <div class="toggle-link">
+                    <a onclick="toggleForm()">Switch to Fertilizer Recommendation</a>
+                </div>
+            </div>
+
+            <!-- FERTILIZER FORM -->
+            <div class="form-box fertilizer-box">
+                <h2 class="title">Fertilizer Recommendation</h2>
+
+                <form id="fertilizerForm">
+
+                    <div class="input-box">
+                        <i class="fas fa-thermometer-half"></i>
+                        <input type="number" id="f_temperature" placeholder="Temperature (°C)" required>
+                    </div>
+
+                    <div class="input-box">
+                        <i class='bx bx-water'></i>
+                        <input type="number" id="f_humidity" placeholder="Humidity (%)" required>
+                    </div>
+
+                    <div class="input-box">
+                        <i class='bx bx-cloud-rain'></i>
+                        <input type="number" id="moisture" placeholder="Moisture" required>
+                    </div>
+
+                    <div class="input-box">
+                        <i class='bx bx-globe'></i>
+                        <select id="soil_type" required>
+                            <option disabled selected>Select Soil Type</option>
+                            <option>Black</option>
+                            <option>Clay</option>
+                            <option>Loamy</option>
+                            <option>Red</option>
+                            <option>Sandy</option>
+                        </select>
+                    </div>
+
+                    <div class="input-box">
+                        <i class='bx bx-leaf'></i>
+                        <select id="crop_type" required>
+                            <option disabled selected>Select Crop Type</option>
+                            <option>Barley</option>
+                            <option>Cotton</option>
+                            <option>Ground Nuts</option>
+                            <option>Maize</option>
+                            <option>Millets</option>
+                            <option>Oil seeds</option>
+                            <option>Paddy</option>
+                            <option>Pulses</option>
+                            <option>Sugarcane</option>
+                            <option>Tobacco</option>
+                            <option>Wheat</option>
+                        </select>
+                    </div>
+
+                    <div class="input-box">
+                        <i class='bx bx-atom'></i>
+                        <input type="number" id="f_N" placeholder="Nitrogen (N)" required>
+                    </div>
+
+                    <div class="input-box">
+                        <i class='bx bx-leaf'></i>
+                        <input type="number" id="f_P" placeholder="Phosphorus (P)" required>
+                    </div>
+
+                    <div class="input-box">
+                        <i class='bx bx-test-tube'></i>
+                        <input type="number" id="f_K" placeholder="Potassium (K)" required>
+                    </div>
+
+                    <button class="btn" type="submit">Get Recommendation</button>
+                </form>
+
+                <div class="result-box" id="fertilizerResult">
+                    <h4 class="font-semibold text-green-600 mb-1">Recommended Fertilizer:</h4>
+                    <p id="fertilizerResultText"></p>
+                </div>
+
+                <div class="toggle-link">
+                    <a onclick="toggleForm()">Switch to Crop Recommendation</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleForm() {
+            document.querySelector(".flip-box").classList.toggle("active");
+        }
+
+        function toggleMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        // CROP FORM
+        document.getElementById("cropForm").onsubmit = async function (e) {
+            e.preventDefault();
+
+            let formData = new FormData();
+            formData.append("N", N.value);
+            formData.append("P", P.value);
+            formData.append("K", K.value);
+            formData.append("temperature", temperature.value);
+            formData.append("humidity", humidity.value);
+            formData.append("ph", ph.value);
+            formData.append("rainfall", rain.value);
+
+            let response = await fetch("/predict_crop", { method: "POST", body: formData });
+            let data = await response.json();
+
+            cropResultText.textContent = data.success ? data.prediction : "Error";
+            cropResult.classList.add("show");
+        };
+
+        // FERTILIZER FORM
+        document.getElementById("fertilizerForm").onsubmit = async function (e) {
+            e.preventDefault();
+
+            let formData = new FormData();
+            formData.append("temperature", f_temperature.value);
+            formData.append("humidity", f_humidity.value);
+            formData.append("moisture", moisture.value);
+            formData.append("soil_type", soil_type.value);
+            formData.append("crop_type", crop_type.value);
+            formData.append("nitrogen", f_N.value);
+            formData.append("phosphorous", f_P.value);
+            formData.append("potassium", f_K.value);
+
+            let response = await fetch("/predict_fertilizer", { method: "POST", body: formData });
+            let data = await response.json();
+
+            fertilizerResultText.textContent = data.success ? data.prediction : "Error";
+            fertilizerResult.classList.add("show");
+        };
+    </script>
+
+</body>
+
+</html>

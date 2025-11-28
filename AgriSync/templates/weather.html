@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+      :root {
+        --primary-clr: #5598fd;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+        min-width: 100px;
+        padding: 50px;
+        background: var(--primary-clr);
+        transition: background-image 0.3s ease;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+        background-size: cover;
+        background-position: center;
+      }
+      img {
+        width: 100%;
+      }
+
+      .wrapper {
+        display: flex;
+        width: 500px;
+        min-width: 500px; /* Adjusted for better responsiveness */
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      .sidebar {
+        width: 25%;
+        min-width: 230px;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #caf0f8;
+      }
+      .search {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        margin-top: 20px;
+        position: relative;
+      }
+
+      .search input {
+        width: 100%;
+        height: 40px;
+        border: 1px solid #ced4da;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 5px;
+        padding: 0 15px;
+        font-size: 14px;
+        color: #495057;
+      }
+
+      .search button {
+        min-width: 40px;
+        height: 40px;
+        border: none;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        background-color: var(--primary-clr);
+        font-size: 14px;
+        color: #fff;
+        cursor: pointer;
+      }
+      .weather-icon {
+        width: 80%;
+        height: 160px;
+        text-align: center;
+        margin-top: 5px;
+      }
+      .weather-icon #icon {
+        width: 80%;
+        object-fit: cover;
+      }
+      .temprature {
+        display: flex;
+      }
+      .temprature #temp {
+        font-size: 70px;
+        font-weight: 100;
+        line-height: 1;
+      }
+      .temperature span {
+        font-size: 40px;
+        margin-top: -10px;
+        display: block;
+      }
+      .divider {
+        width: 100%;
+        height: 1px;
+        margin: 20px 0;
+        background-color: #000;
+      }
+      .condition-rain {
+        font-size: 12px;
+        text-transform: capitalize;
+      }
+      .condition-rain div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .condition-rain div i {
+        width: 20px;
+      }
+      .location {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .main {
+        width: 100%;
+        min-width: 400px;
+        padding: 20px 40px;
+        position: relative;
+        padding-bottom: 90px;
+        background-color: #ade8f4;
+      }
+      .main nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      nav .options {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+      .options button {
+        border: none;
+        background: transparent;
+        font-size: 16px;
+        font-weight: 600;
+        color: #495057;
+        cursor: pointer;
+        text-transform: capitalize;
+      }
+      .options button.active {
+        color: var(--primary-clr);
+      }
+      nav .units button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        color: #1a1a1a;
+        background-color: #fff;
+      }
+      .units button.active {
+        color: #fff;
+        background-color: #1a1a1a;
+      }
+      .main .cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 50px;
+      }
+      .cards .card {
+        width: 100px;
+        height: 130px;
+        border-radius: 20px;
+        color: #1a1a1a;
+        background-color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .card h2 {
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .card .card-icon {
+        width: 50%;
+        margin: 0 auto;
+      }
+      .card .day-temp {
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .highlights {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 50px;
+      }
+      .highlights .heading {
+        width: 100%;
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+      .highlights .card2 {
+        width: 250px;
+        height: 150px;
+        border-radius: 20px;
+        color: #1a1a1a;
+        background-color: #fff;
+        padding: 10px 20px;
+        display: flex;
+        flex-direction: column;
+      }
+      .card2 .card-heading {
+        color: #2f3e46;
+      }
+      .card2 .content {
+        margin-top: 20px;
+      }
+      .card2 .content p:first-child {
+        text-align: center;
+        font-size: 30px;
+      }
+      .card2 .content p:last-child {
+        font-size: 12px;
+        margin-top: 20px;
+        text-align: left;
+      }
+    </style>
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <title>Weather Forecast App</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="sidebar">
+        <div>
+          <form action="" class="search" id="search">
+            <input type="text" id="query" placeholder="Search..." />
+            <button>
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+          <div class="weather-icon">
+            <img src="/static/icons/sun/4.png" alt="" id="icon" />
+          </div>
+          <div class="temprature">
+            <h1 id="temp">0</h1>
+            <span class="temp-unit">°C</span>
+          </div>
+          <div class="date-time">
+            <p id="date-time">Monday, 12:00</p>
+          </div>
+          <div class="divider"></div>
+          <div class="condition-rain">
+            <div class="condition">
+              <i class="fas fa-cloud"></i>
+              <div class="condition" id="condition">condition</div>
+            </div>
+            <div class="rain">
+              <i class="fas fa-tint"></i>
+              <p id="rain">Perc - 0%</p>
+            </div>
+          </div>
+        </div>
+        <div class="location">
+          <div class="location-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="location-text">
+            <p id="location">location</p>
+          </div>
+        </div>
+      </div>
+      <div class="main">
+        <header class="bg-blue-600 text-white p-4 mb-4">
+          <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">
+              Weather Forecast
+            </h1>
+            <nav>
+              <ul class="flex space-x-4">
+                <li>
+                  <a class="hover:underline" href="/">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a class="hover:underline" href="/">
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a class="hover:underline" href="./contact">
+                    Contact
+                  </a>
+                </li>
+              </ul>
+            </nav>
+            <div class="relative">
+              <button class="hover:underline" id="dropdownButton" onclick="toggleDropdown()">Menu</button>
+              <ul class="absolute right-0 mt-2 w-64 bg-white text-blue-600 font-semibold rounded-lg shadow-lg hidden" id="dropdownMenu">
+                <li class="px-4 py-2 border-b border-gray-200">
+                  <a class="text-blue-600 font-semibold block p-2 rounded transition-all duration-200" href="{{ url_for('ai_engine_page') }}">
+                    Disease Prediction and Fertilizer Suggestion
+                  </a>
+                </li>
+                <li class="px-4 py-2 border-b border-gray-200">
+                  <a class="text-blue-600 font-semibold block p-2 rounded transition-all duration-200" href="{{ url_for('crop_recommendation') }}">
+                    Crop Recommendation
+                  </a>
+                </li>
+                <li class="px-4 py-2 border-b border-gray-200">
+                  <a class="text-blue-600 font-semibold block p-2 rounded transition-all duration-200" href="{{ url_for('weather_page') }}">
+                    Weather Prediction
+                  </a>
+                </li>
+                <li class="px-4 py-2 border-b border-gray-200">
+                  <a class="text-blue-600 font-semibold block p-2 rounded transition-all duration-200" href="{{ url_for('schemes_page') }}">
+                    Schemes in Agriculture
+                  </a>
+                </li>
+                <li class="px-4 py-2 border-b border-gray-200">
+                  <a class="text-blue-600 font-semibold block p-2 rounded transition-all duration-200" href="{{ url_for('data_visuals') }}">
+                    Data Visuals For Production of Crops
+                  </a>
+                </li>
+                <li class="px-4 py-2 border-b border-gray-200">
+                  <a class="text-blue-600 font-semibold block p-2 rounded transition-all duration-200" href="{{ url_for('help_line') }}">
+                    Farm Connect
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </header>
+        <nav>
+          <ul class="options">
+            <button class="hourly">today</button>
+            <button class="week active">week</button>
+          </ul>
+          <ul class="options units">
+            <button class="celcius active">°C</button>
+            <button class="fahrenheit">°F</button>
+          </ul>
+        </nav>
+        <div class="cards" id="weather-cards"></div>
+        <div class="highlights">
+          <h2 class="heading">today's highlights</h2>
+          <div class="cards">
+            <div class="card2">
+              <h4 class="card-heading">Wind Status</h4>
+              <div class="content">
+                <p class="wind-speed">0</p>
+                <p class="">Low</p>
+              </div>
+            </div>
+            <div class="card2">
+              <h4 class="card-heading">Air Quality</h4>
+              <div class="content">
+                <p class="air-quality">0</p>
+                <p class="air-quality-status">Low</p>
+              </div>
+            </div>
+            <div class="card2">
+              <h4 class="card-heading">Humidity</h4>
+              <div class="content">
+                <p class="humidity">0</p>
+                <p class="humidity-status">Low</p>
+              </div>
+            </div>
+            <div class="card2">
+              <h4 class="card-heading">Visibility</h4>
+              <div class="content">
+                <p class="visibility">0</p>
+                <p class="visibility-status">Low</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleDropdown() {
+        const dropdownMenu = document.getElementById("dropdownMenu");
+        dropdownMenu.classList.toggle("hidden");
+      }
+
+      const temp = document.getElementById("temp"),
+        date = document.getElementById("date-time"),
+        currentLocation = document.getElementById("location"),
+        condition = document.getElementById("condition"),
+        rain = document.getElementById("rain"),
+        mainIcon = document.getElementById("icon"),
+        windSpeed = document.querySelector(".wind-speed"),
+        humidity = document.querySelector(".humidity"),
+        visibility = document.querySelector(".visibility"),
+        humidityStatus = document.querySelector(".humidity-status"),
+        airQuality = document.querySelector(".air-quality"),
+        airQualityStatus = document.querySelector(".air-quality-status"),
+        visibilityStatus = document.querySelector(".visibility-status");
+      weatherCards = document.querySelector("#weather-cards"),
+        celciusBtn = document.querySelector(".celcius"),
+        fahrenheitBtn = document.querySelector(".fahrenheit"),
+        hourlyBtn = document.querySelector(".hourly"),
+        weekBtn = document.querySelector(".week"),
+        tempUnit = document.querySelectorAll(".temp-unit"),
+        searchForm = document.querySelector("#search"),
+        search = document.querySelector("#query");
+
+      let currentCity = "";
+      let currentUnit = "C";
+      let hourlyorWeek = "Week";
+
+      function getDateTime() {
+        let now = new Date(),
+          hour = now.getHours(),
+          minute = now.getMinutes();
+
+        let days = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+
+        hour = hour % 12 || 12;
+        if (hour < 10) {
+          hour = "0" + hour;
+        }
+        if (minute < 10) {
+          minute = "0" + minute;
+        }
+
+        let dayString = days[now.getDay()];
+        return `${dayString}, ${hour}:${minute}`;
+      }
+
+      date.innerText = getDateTime();
+      setInterval(() => {
+        date.innerText = getDateTime();
+      }, 1000);
+
+      function getPublicIp() {
+        fetch("https://geolocation-db.com/json/", {
+            method: "GET",
+          })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            currentCity = data.city;
+            getWeatherData(data.city, currentUnit, hourlyorWeek);
+          });
+      }
+      getPublicIp();
+
+      function getWeatherData(city, unit, hourlyorWeek) {
+        console.log(city);
+        const apiKey = "2VXNCLWCN2QYBZTHRJU89EP8Q";
+        fetch(
+            `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=metric&key=${apiKey}&contentType=json`, {
+              method: "GET",
+            }
+          )
+          .then((response) => response.json())
+          .then((data) => {
+            let today = data.currentConditions;
+            if (unit === "C") {
+              temp.innerText = today.temp;
+            } else {
+              temp.innerText = celciusToFahrenheit(today.temp);
+            }
+            currentLocation.innerText = data.resolvedAddress;
+            condition.innerText = today.conditions;
+            rain.innerText = "Perc -" + today.precip + "%";
+            windSpeed.innerText = today.windspeed;
+            humidity.innerText = today.humidity + "%";
+            visibility.innerText = today.visibility;
+            airQuality.innerText = today.winddir;
+            measureHumidityStatus(today.humidity);
+            mainIcon.src = getIcon(today.icon);
+            if (hourlyorWeek.toLowerCase() === "hourly") {
+              updateForecast(data.days[0].hours, unit, "day");
+            } else {
+              updateForecast(data.days, unit, "week");
+            }
+          })
+          .catch((err) => {
+            alert("Invalid Entry");
+          });
+      }
+
+      function celciusToFahrenheit(temp) {
+        return ((temp * 9) / 5 + 32).toFixed(1);
+      }
+
+      function measureHumidityStatus(humidity) {
+        if (humidity <= 30) {
+          humidityStatus.innerText = "Low";
+        } else if (humidity <= 60) {
+          humidityStatus.innerText = "Moderate";
+        } else {
+          humidityStatus.innerText = "High";
+        }
+      }
+
+      function getIcon(condition) {
+        if (condition === "Partly-cloudy-day") {
+          return "/static/icons/sun/27.png";
+        } else if (condition === "partly-cloudy-night") {
+          return "/static/icons/moon/15.png";
+        } else if (condition === "rain") {
+          return "/static/icons/rain/39.png";
+        } else if (condition === "clear-day") {
+          return "/static/icons/sun/26.png";
+        } else if (condition === "clear-night") {
+          return "/static/icons/moon/10.png";
+        } else {
+          return "/static/icons/sun/26.png";
+        }
+      }
+
+      function getDayName(date) {
+        let day = new Date(date);
+        let days = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+        return days[day.getDay()];
+      }
+
+      function updateForecast(data, unit, type) {
+        weatherCards.innerHTML = "";
+        if (type === "week") {
+          data.forEach((day) => {
+            const div = document.createElement("div");
+            div.classList.add("card");
+            div.innerHTML = `
+              <h2>${getDayName(day.datetime)}</h2>
+              <img src="${getIcon(day.icon)}" alt="" class="card-icon"/>
+              <p class="day-temp">${unit === "C" ? day.tempmax : celciusToFahrenheit(day.tempmax)}° / ${unit === "C" ? day.tempmin : celciusToFahrenheit(day.tempmin)}°</p>
+            `;
+            weatherCards.appendChild(div);
+          });
+        } else if (type === "day") {
+          data.forEach((hour) => {
+            const div = document.createElement("div");
+            div.classList.add("card");
+            div.innerHTML = `
+              <h2>${hour.datetime}</h2>
+              <img src="${getIcon(hour.icon)}" alt="" class="card-icon"/>
+              <p class="day-temp">${unit === "C" ? hour.temp : celciusToFahrenheit(hour.temp)}°</p>
+            `;
+            weatherCards.appendChild(div);
+          });
+        }
+      }
+
+      searchForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        currentCity = search.value.trim();
+        if (currentCity) {
+          getWeatherData(currentCity, currentUnit, hourlyorWeek);
+        }
+      });
+
+      celciusBtn.addEventListener("click", () => {
+        if (currentUnit !== "C") {
+          currentUnit = "C";
+          changeUnit(currentUnit);
+          getWeatherData(currentCity, currentUnit, hourlyorWeek);
+        }
+      });
+
+      fahrenheitBtn.addEventListener("click", () => {
+        if (currentUnit !== "F") {
+          currentUnit = "F";
+          changeUnit(currentUnit);
+          getWeatherData(currentCity, currentUnit, hourlyorWeek);
+        }
+      });
+
+      hourlyBtn.addEventListener("click", () => {
+        if (hourlyorWeek !== "Hourly") {
+          hourlyorWeek = "Hourly";
+          changeForecast(hourlyorWeek);
+          getWeatherData(currentCity, currentUnit, hourlyorWeek);
+        }
+      });
+
+      weekBtn.addEventListener("click", () => {
+        if (hourlyorWeek !== "Week") {
+          hourlyorWeek = "Week";
+          changeForecast(hourlyorWeek);
+          getWeatherData(currentCity, currentUnit, hourlyorWeek);
+        }
+      });
+
+      function changeUnit(unit) {
+        if (unit.toUpperCase() === "C") {
+          celciusBtn.classList.add("active");
+          fahrenheitBtn.classList.remove("active");
+        } else {
+          celciusBtn.classList.remove("active");
+          fahrenheitBtn.classList.add("active");
+        }
+        tempUnit.forEach((el) => (el.innerText = "°" + unit.toUpperCase()));
+      }
+
+      function changeForecast(type) {
+        if (type.toLowerCase() === "hourly") {
+          hourlyBtn.classList.add("active");
+          weekBtn.classList.remove("active");
+        } else {
+          hourlyBtn.classList.remove("active");
+          weekBtn.classList.add("active");
+        }
+      }
+    </script>
+  </body>
+</html>

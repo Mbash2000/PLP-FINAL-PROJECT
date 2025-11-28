@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <title>AgriSync - {% block pagetitle %}{% endblock pagetitle %}</title>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #E8F5E9;
+        }
+        .nav-link {
+            @apply text-green-900 hover:text-green-700 transition font-medium;
+        }
+        .dropdown-item-custom {
+            @apply block px-4 py-2 hover:bg-green-50 text-green-700 transition rounded;
+        }
+        .footer-basic {
+            background: #043610;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+<!-- NAVBAR -->
+<nav class="bg-white shadow">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/" class="text-2xl font-bold text-green-800 flex items-center">
+            <i class="fa-solid fa-leaf mr-2"></i> AgriSync
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-8">
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="/market">Supplements</a>
+            <a class="nav-link" href="/index">AI Engine</a>
+            <a class="nav-link" href="/contact">Contact</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="menuBtn" class="md:hidden text-2xl text-green-700">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="hidden px-6 pb-4 bg-white shadow-md md:hidden">
+        <a class="dropdown-item-custom" href="{{ url_for('ai_engine_page') }}">
+            Disease Prediction & Fertilizer Suggestion
+        </a>
+        <a class="dropdown-item-custom" href="{{ url_for('crop_recommendation') }}">
+            Crop Recommendation
+        </a>
+        <a class="dropdown-item-custom" href="{{ url_for('weather_page') }}">
+            Weather Prediction
+        </a>
+        <a class="dropdown-item-custom" href="{{ url_for('schemes_page') }}">
+            Agriculture Schemes
+        </a>
+        <a class="dropdown-item-custom" href="{{ url_for('data_visuals') }}">
+            Crop Production Data Visuals
+        </a>
+        <a class="dropdown-item-custom" href="{{ url_for('help_line') }}">
+            Farm Connect
+        </a>
+    </div>
+</nav>
+
+<script>
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+    });
+</script>
+
+<!-- BODY CONTENT -->
+{% block body %}{% endblock body %}
+
+<!-- FOOTER -->
+<footer class="footer-basic text-white mt-auto py-8">
+    <div class="container mx-auto text-center">
+        <p class="text-lg font-semibold mb-2">AgriSync</p>
+        <p class="text-sm text-green-100">
+            Empowering Farmers with Smart Agricultural Intelligence
+        </p>
+        <div class="flex justify-center space-x-4 mt-4">
+            <i class="fab fa-facebook text-xl hover:text-green-300 cursor-pointer"></i>
+            <i class="fab fa-twitter text-xl hover:text-green-300 cursor-pointer"></i>
+            <i class="fab fa-instagram text-xl hover:text-green-300 cursor-pointer"></i>
+        </div>
+        <p class="text-xs mt-4 text-green-200">© 2025 AgriSync. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>

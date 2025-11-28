@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   AgriSync
+  </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Poppins', sans-serif;
+        }
+  </style>
+ </head>
+ <body class="bg-gray-100 text-gray-800">
+  <nav class="bg-[#65b741] p-6 shadow-md flex justify-between items-center relative z-50">
+   <div class="text-white font-bold text-lg">
+    <i class="fas fa-tree pr-2"></i>
+    AgriSync
+   </div>
+   <div class="space-x-4">
+    <a class="text-white hover:bg-green-600 px-3 py-2 rounded" href="/">
+     Home
+    </a>
+    <a class="text-white hover:bg-green-600 px-3 py-2 rounded" href="/">
+     About Us
+    </a>
+    <a class="text-white hover:bg-green-600 px-3 py-2 rounded" href="./contact">
+     Contact
+    </a>
+   </div>
+   <div class="relative">
+    <button class="fas fa-bars text-2xl cursor-pointer text-green-800 focus:outline-none" id="dropdownButton"></button>
+    <ul class="absolute right-0 mt-2 w-64 bg-white text-black rounded-lg shadow-lg hidden z-50" id="dropdownMenu">
+     <li class="px-4 py-2 border-b border-gray-200">
+      <a class="text-green-600 font-semibold block p-2 rounded transition-all duration-200" href="{{ url_for('ai_engine_page') }}">
+       Disease Prediction and Fertilizer Suggestion
+      </a>
+     </li>
+     <li class="px-4 py-2 border-b border-gray-200">
+      <a class="text-green-600 font-semibold block p-2 rounded transition-all duration-200" href="{{ url_for('crop_recommendation') }}">
+       Crop Recommendation
+      </a>
+     </li>
+     <li class="px-4 py-2 border-b border-gray-200">
+      <a class="text-green-600 font-semibold block p-2 rounded transition-all duration-200" href="{{ url_for('weather_page') }}">
+       Weather Prediction
+      </a>
+     </li>
+     <li class="px-4 py-2 border-b border-gray-200">
+      <a class="text-green-600 font-semibold block p-2 rounded transition-all duration-200" href="{{ url_for('schemes_page') }}">
+       Schemes in Agriculture
+      </a>
+     </li>
+     <li class="px-4 py-2 border-b border-gray-200">
+      <a class="text-green-600 font-semibold block p-2 rounded transition-all duration-200" href="{{ url_for('data_visuals') }}">
+       Data Visuals For Production of Crops
+      </a>
+     </li>
+     <li class="px-4 py-2 border-b border-gray-200">
+      <a class="text-green-600 font-semibold block p-2 rounded transition-all duration-200" href="{{ url_for('help_line') }}">
+       Farm Connect
+      </a>
+     </li>
+    </ul>
+   </div>
+   <script>
+    document.getElementById('dropdownButton').addEventListener('click', function () {
+      const dropdownMenu = document.getElementById('dropdownMenu');
+      dropdownMenu.classList.toggle('hidden');
+    });
+   </script>
+  </nav>
+  <div class="relative z-10">
+   <img alt="A farmer standing in a lush green field, holding a tablet and smiling, symbolizing the use of technology in farming" class="w-full h-64 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/py99nyVCsvHZfWtDf7YEqlo9vHsYHgDgyhx_Erqngdw.jpg" width="1920"/>
+   <div class="absolute inset-0 bg-black opacity-50 flex items-center justify-center">
+    <h1 class="text-white text-3xl font-bold">
+     Farmer's Help-Line Portal
+    </h1>
+   </div>
+  </div>
+  <div class="container mx-auto p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+   <div class="card bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+    <h2 class="text-[#65b741] text-2xl font-semibold mb-4">
+     Government Schemes for Farmers
+    </h2>
+    <p class="mb-4">
+     Explore various government schemes that provide financial aid, insurance, and subsidies for farmers.
+    </p>
+    <a class="btn bg-[#65b741] text-white px-4 py-2 rounded hover:bg-green-600" href="https://en.wikipedia.org/wiki/List_of_schemes_of_the_government_of_India" target="_blank" rel="noopener noreferrer">
+     Learn More
+    </a>
+   </div>
+   <div class="card bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+    <h2 class="text-[#65b741] text-2xl font-semibold mb-4">
+     Market Prices
+    </h2>
+    <p class="mb-4">
+     Check the latest market prices for crops and plan your sales accordingly.
+    </p>
+    <a class="btn bg-[#65b741] text-white px-4 py-2 rounded hover:bg-green-600" href="http://agmarknet.gov.in/" target="_blank" rel="noopener noreferrer">
+     View Prices
+    </a>
+   </div>
+   <div class="card bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+    <h2 class="text-[#65b741] text-2xl font-semibold mb-4">
+     E-commerce Services
+    </h2>
+    <p class="mb-4">
+     Buy and sell farming products directly through our platform.
+    </p>
+    <a class="btn bg-[#65b741] text-white px-4 py-2 rounded hover:bg-green-600" href="https://www.plugandplaytechcenter.com/insights/new-agriculture-technology-modern-farming/#:~:text=New%20Agriculture%20Technology%20in%20Modern%20Farming%201%20Indoor,...%206%20Blockchain.%20...%207%20Artificial%20Intelligence.%20" target="_blank" rel="noopener noreferrer">
+     Start Trading
+    </a>
+   </div>
+   <div class="card bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+    <h2 class="text-[#65b741] text-2xl font-semibold mb-4">
+     Weather Info
+    </h2>
+    <p class="mb-4">
+     Get the latest weather updates to plan your farming activities.
+    </p>
+    <a class="btn bg-[#65b741] text-white px-4 py-2 rounded hover:bg-green-600" href="https://www.accuweather.com/en/in/india-weather" target="_blank" rel="noopener noreferrer">
+     Check Weather
+    </a>
+   </div>
+   <div class="card bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+    <h2 class="text-[#65b741] text-2xl font-semibold mb-4">
+     Modern Organic Farming Methods
+    </h2>
+    <p class="mb-4">
+     Learn about modern organic farming methods to improve your yield.
+    </p>
+    <a class="btn bg-[#65b741] text-white px-4 py-2 rounded hover:bg-green-600" href="https://en.wikipedia.org/wiki/Organic_farming" target="_blank" rel="noopener noreferrer">
+     Learn More
+    </a>
+   </div>
+   <div class="card bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+    <h2 class="text-[#65b741] text-2xl font-semibold mb-4">
+     Advices For Better Farming
+    </h2>
+    <p class="mb-4">
+     Get expert advice to enhance your farming techniques.
+    </p>
+    <a class="btn bg-[#65b741] text-white px-4 py-2 rounded hover:bg-green-600" href="https://www.rainforestsaver.org/advice-for-farmers" target="_blank" rel="noopener noreferrer">
+     Get Advice
+    </a>
+   </div>
+  </div>
+  <footer class="bg-[#65b741] text-white text-center p-4 mt-6">
+   © AgriSync. All rights reserved.
+  </footer>
+ </body>
+</html>

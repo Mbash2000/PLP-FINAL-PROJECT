@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block pagetitle %}
+Contact Us
+{% endblock pagetitle %}
+
+{% block body %}
+
+<!-- Hero Section -->
+<div class="text-center py-12 bg-gradient-to-r from-green-700 to-green-900 text-white">
+    <h1 class="text-4xl font-bold mb-2">
+        📞 Contact Us
+    </h1>
+    <p class="text-lg font-light">
+        For any queries or suggestions, reach out to us. We are always happy to help!
+    </p>
+</div>
+
+<!-- Contact Form Section -->
+<div class="container mx-auto px-6 py-12">
+    <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-8">
+
+        <h2 class="text-2xl font-bold text-green-800 mb-6 text-center">
+            Get in Touch with AgriSync
+        </h2>
+
+        <form method="POST" action="/contact">
+            <!-- Name -->
+            <div class="mb-6">
+                <label class="block text-green-900 font-medium mb-2">
+                    <i class="fa-solid fa-user mr-2 text-green-700"></i>Your Name
+                </label>
+                <input type="text" name="name"
+                       class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-600"
+                       placeholder="Enter your name" required>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-6">
+                <label class="block text-green-900 font-medium mb-2">
+                    <i class="fa-solid fa-envelope mr-2 text-green-700"></i>Email Address
+                </label>
+                <input type="email" name="email"
+                       class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-600"
+                       placeholder="Enter your email" required>
+            </div>
+
+            <!-- Message -->
+            <div class="mb-6">
+                <label class="block text-green-900 font-medium mb-2">
+                    <i class="fa-solid fa-message mr-2 text-green-700"></i>Your Message
+                </label>
+                <textarea name="message" rows="5"
+                          class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-green-600"
+                          placeholder="Write your message..." required></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit"
+                        class="bg-green-700 hover:bg-green-800 text-white font-semibold px-8 py-3 rounded-lg shadow-md transition">
+                    Send Message
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<!-- Additional Contact Info -->
+<div class="container mx-auto px-6 pb-12 text-center">
+    <h3 class="text-xl font-semibold text-green-900 mb-4">Other Ways to Reach Us</h3>
+
+    <div class="flex flex-wrap justify-center gap-8">
+
+        <div class="text-center">
+            <i class="fa-solid fa-phone text-3xl text-green-800 mb-2"></i>
+            <p class="font-medium text-green-900">Phone</p>
+            <p class="text-gray-700">+234 000 0000 000</p>
+        </div>
+
+        <div class="text-center">
+            <i class="fa-solid fa-envelope-circle-check text-3xl text-green-800 mb-2"></i>
+            <p class="font-medium text-green-900">Email</p>
+            <p class="text-gray-700">support@agrisync.com</p>
+        </div>
+
+        <div class="text-center">
+            <i class="fa-solid fa-location-dot text-3xl text-green-800 mb-2"></i>
+            <p class="font-medium text-green-900">Office</p>
+            <p class="text-gray-700">Kano, Nigeria</p>
+        </div>
+
+    </div>
+</div>
+
+{% endblock body %}
