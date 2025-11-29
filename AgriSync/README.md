@@ -125,17 +125,17 @@ _The database will be automatically created on first run_
 
 <div align="center">
 
-🌐 Get in Touch
+🌐 Get in Touch <br>
    📞 +234 916 160 9808
    ✉️ muhammadbashir4338@gmail.com
 
 
 
 
-📱 Follow Us
-  🔵 Facebook: facebook.com/yourprofile
-   🐦 Twitter: twitter.com/yourprofile
-   🔗 LinkedIn: linkedin.com/in/yourprofile
+📱 Follow Us<br>
+  🔵 Facebook: https://www.facebook.com/profile.php?id=100091949653978
+   🐦 Twitter: x.com/Mbash2000
+   🔗 LinkedIn: https://www.linkedin.com/in/muhammad-bashir-5ba892287
 
 
 

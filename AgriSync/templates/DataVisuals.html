@@ -65,7 +65,7 @@
                 Crop Production Data Visuals
             </h2>
             <p class="text-center text-lg text-green-700 mt-3">
-                Explore the top 5 crop-producing states across India using interactive charts.
+                Explore the top 5 crop-producing states across Nigeria using interactive charts.
             </p>
         </div>
 
@@ -74,32 +74,32 @@
 
             <!-- Card Template -->
             <div class="chart-card">
-                <h3 class="chart-title">Rice Production (India)</h3>
+                <h3 class="chart-title">Rice Production (Nigeria)</h3>
                 <canvas id="chart1"></canvas>
             </div>
 
             <div class="chart-card">
-                <h3 class="chart-title">Jute Production (India)</h3>
+                <h3 class="chart-title">Jute Production (Nigeria)</h3>
                 <canvas id="chart2"></canvas>
             </div>
 
             <div class="chart-card">
-                <h3 class="chart-title">Maize Production (India)</h3>
+                <h3 class="chart-title">Maize Production (Nigeria)</h3>
                 <canvas id="chart3"></canvas>
             </div>
 
             <div class="chart-card">
-                <h3 class="chart-title">Mango Production (India)</h3>
+                <h3 class="chart-title">Mango Production (Nigeria)</h3>
                 <canvas id="chart4"></canvas>
             </div>
 
             <div class="chart-card">
-                <h3 class="chart-title">Papaya Production (India)</h3>
+                <h3 class="chart-title">Papaya Production (Nigeria)</h3>
                 <canvas id="chart5"></canvas>
             </div>
 
             <div class="chart-card">
-                <h3 class="chart-title">Banana Production (India)</h3>
+                <h3 class="chart-title">Banana Production (Nigeria)</h3>
                 <canvas id="chart6"></canvas>
             </div>
 
@@ -110,12 +110,12 @@
             <h2 class="text-center text-2xl font-bold text-green-800">Key Insights</h2>
 
             <ul class="text-center mt-6 space-y-3 text-lg text-green-700">
-                <li><b class="highlight">Punjab</b> dominates rice production.</li>
-                <li><b class="highlight">West Bengal</b> leads in Jute cultivation.</li>
-                <li><b class="highlight">Telangana</b> excels in Maize farming.</li>
-                <li><b class="highlight">Andhra Pradesh</b> tops Mango output.</li>
-                <li><b class="highlight">Andhra Pradesh</b> also leads in Papaya.</li>
-                <li><b class="highlight">Gujarat</b> produces the most Bananas.</li>
+                <li><b class="highlight">Kano</b> dominates rice production.</li>
+                <li><b class="highlight">Sokoto</b> leads in Jute cultivation.</li>
+                <li><b class="highlight">Pleateu</b> excels in Maize farming.</li>
+                <li><b class="highlight">Katsina</b> tops Mango output.</li>
+                <li><b class="highlight">Katsina</b> also leads in Papaya.</li>
+                <li><b class="highlight">Kaduna</b> produces the most Bananas.</li>
             </ul>
         </div>
 
@@ -177,12 +177,12 @@
             });
         };
 
-        createChart("chart1", "Rice Production", ["Punjab", "AP", "Chhattisgarh", "WB", "Telangana"], [531663, 298841, 279105, 266350, 221072]);
-        createChart("chart2", "Jute Production", ["WB", "Bihar", "Assam", "Meghalaya", "Odisha"], [484674, 83199, 25968, 11822, 4583]);
-        createChart("chart3", "Maize Production", ["Telangana", "HP", "Rajasthan", "AP", "Punjab"], [99867, 54259, 46552, 40630, 36767]);
-        createChart("chart4", "Mango Production", ["AP", "Kerala", "TN", "Telangana", "Karnataka"], [126983, 28950, 24068, 19840, 13236]);
-        createChart("chart5", "Papaya Production", ["AP", "Kerala", "Assam", "Telangana", "Manipur"], [41551, 6225, 5234, 4766, 1219]);
-        createChart("chart6", "Banana Production", ["Gujarat", "TN", "Maharashtra", "AP", "MP"], [161797, 134980, 129811, 96421, 36190]);
+        createChart("chart1", "Rice Production", ["Kano", "Katsina", "Zamfara", "Sokoto", "Pleateu"], [531663, 298841, 279105, 266350, 221072]);
+        createChart("chart2", "Jute Production", ["Sokoto", "Bauchi", "Kogi", "Niger", "Nassarawa"], [484674, 83199, 25968, 11822, 4583]);
+        createChart("chart3", "Maize Production", ["Pleateu", "Lagos", "Kebbi", "Katsina", "Kano"], [99867, 54259, 46552, 40630, 36767]);
+        createChart("chart4", "Mango Production", ["Katsina", "Borno", "Jigawa", "Pleateu", "Adamawa"], [126983, 28950, 24068, 19840, 13236]);
+        createChart("chart5", "Papaya Production", ["Katsina", "Borno", "Kogi", "Pleateu", "Yobe"], [41551, 6225, 5234, 4766, 1219]);
+        createChart("chart6", "Banana Production", ["Kaduna", "Jigawa", "Abuja", "Katsina", "River"], [161797, 134980, 129811, 96421, 36190]);
 
         function toggleDropdown() {
             document.getElementById("dropdownMenu").classList.toggle("hidden");
